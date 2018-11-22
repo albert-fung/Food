@@ -1,0 +1,152 @@
+$border-radius:50px;
+$btn-diameter:50px; 
+$regular-font: 'Open Sans', sans-serif;
+$title-font: 'Permanent Marker', cursive;
+$neutral-gray: rgba(250,250,250,0.9);
+$input-height:6vh;
+$input-width:20vw;
+
+*:focus{
+  outline:none;
+}
+.frontpage-container{
+  margin:auto;
+}
+.mainsearch-container{
+  font-family:$regular-font;
+  display:flex;
+  position: relative;
+  width:70vw;
+  min-width:200px; min-height:100px;
+  border-radius:$border-radius;
+  justify-content: center;
+  align-items: center;
+  background-color:darken($neutral-gray,8%);
+}
+
+.title{
+  font-family:$title-font;
+  position: absolute;
+  top: -35px;
+  left:25px;
+  font-size: 3em;
+  letter-spacing: 1.5px;
+}
+
+.search-container{
+  display: flex;
+  input{
+    z-index: 200;
+    font-family:$regular-font;
+    padding: 8px 5px 7px 10px;
+    margin-right:20px;
+    font-size:3vh;
+    height:$input-height;
+    width:$input-width; min-width: 80px;
+    border-radius:$border-radius;
+    border:none;
+    background-color:$neutral-gray;
+  }
+  .input-container{
+    position: relative;
+  }
+  .form-placeholder{
+    position: absolute;
+    transition:all 200ms;
+    font-size:1.2em;
+    top:$input-height/4;
+    left:15px;
+    color:rgba(3, 150, 248, 0.144);
+    pointer-events: none;
+  }
+  .search:focus ~ .form-placeholder, .search:valid ~ .form-placeholder
+    {
+      color:rgb(3, 150, 248);
+      font-size: 0.75em;
+      top:0;
+      left:15px;
+    }
+  i{
+    color:white;
+    transition: all 1.2s ease;
+  }
+  .icon-animation{
+    animation: translateX 5s;
+  }
+  @keyframes translateX {
+    10%,80%{
+      transform: translateX(200px)
+    }
+  }
+
+  #btn-submit{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding:0;
+    height:$btn-diameter;width:$btn-diameter;
+    border:none;
+    border-radius:50%;
+    background-color: #40E0D0;  
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  #btn-submit:hover{
+    background-color: #7F7FD5;
+  }
+  .pop-animation{
+    animation: pop 5s;
+  }
+  @keyframes pop {
+    10%{
+      width:$btn-diameter*1.2;
+      height:$btn-diameter*1.2;
+    }
+    20%,80%{
+      width:0;
+      height:0;
+    }
+    100%{
+      width:$btn-diameter;
+      height:$btn-diameter;
+    }
+  }
+}
+.roundbtn-container{
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.round-btn{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width:50px;
+  height:50px;
+  background-color:#3498db;
+  margin-top:18px;
+}
+.round-btn i{
+  color:#e17055;
+}
+
+@media only screen and (max-width: 640px) {
+  .search-container{
+    display:block;
+  input{
+    margin:auto;
+    width:60vw;
+  }
+  }
+
+  .input-container{
+    margin-top:20px;
+    padding-right:0;
+  }
+
+  #btn-submit{
+    margin:10px auto 10px auto;
+
+  }
+}

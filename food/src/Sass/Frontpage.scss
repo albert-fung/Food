@@ -34,7 +34,11 @@ $input-width:20vw;
 }
 
 .search-container{
+
   display: flex;
+  form{
+    display: inherit;
+  }
   input{
     z-index: 200;
     font-family:$regular-font;

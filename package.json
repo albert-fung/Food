@@ -1,0 +1,23 @@
+{
+  "name": "food_server",
+  "version": "1.0.0",
+  "description": "Boilerplate for Nodejs Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "food": "npm start --prefix food",
+    "dev": "concurrently \"npm run server\" \" npm run food\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "yelp-fusion": "^2.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}

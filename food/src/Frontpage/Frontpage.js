@@ -14,13 +14,13 @@ export default class Frontpage extends React.Component{
     locationInput:""
     }
   }
-  /*Methodo to run animation and fetch required
+  /*Method to run animation and fetch required
   data depending on input */
   submitform(){
     this.addanimation();
     this.fetchdata();
   }
-
+/*Get request using axios library */
   fetchdata(){
     axios.get('/api/restaurants',{
       params:{
@@ -41,7 +41,7 @@ export default class Frontpage extends React.Component{
     btn.children[0].classList.add('icon-animation');
     this.removeanimation();
   }
-  /*Delay */
+  /*Delay*/
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -53,7 +53,8 @@ export default class Frontpage extends React.Component{
     btn.children[0].classList.remove('icon-animation');
   }
 
-  /*Handeling input changes given the DOM and state handler name of the input
+  /*Handeling input changes given the DOM
+   and state handler name of the input
   that is being changed*/
   handleChange(e,stateName){
     this.setState({[stateName]:e.target.value})
@@ -64,17 +65,28 @@ export default class Frontpage extends React.Component{
     <div className="mainsearch-container">
       <div className="title">Food</div>
       <div className="search-container">
-      <form>
         <div className="input-container">
-          <input required name="search" class="search form-control" onChange={(e)=>this.handleChange(e,"searchInput")} value={this.state.name}></input>
+          <input
+            required 
+            name="search" 
+            class="search form-control" 
+            onChange={(e)=>this.handleChange(e,"searchInput")} 
+            value={this.state.name}>
+          </input>
           <label for="search" class="form-placeholder">Find</label>
         </div>
         <div className="input-container">
-          <input required name="location" class="search form-control" onChange={(e)=>this.handleChange(e,"locationInput")}></input>
+          <input 
+            required 
+            name="location" 
+            class="search form-control" 
+            onChange={(e)=>this.handleChange(e,"locationInput")}>
+          </input>
           <label for="search" class="form-placeholder">Location</label>
         </div>
-        <div id="btn-submit" onClick={(e)=>this.submitform(e)}><i class="fas fa-arrow-right fa-2x"></i></div>
-      </form>
+        <div id="btn-submit" onClick={(e)=>this.submitform(e)}>
+          <i class="fas fa-arrow-right fa-2x"></i>
+        </div>
       </div>
     </div>
     <div className="roundbtn-container">

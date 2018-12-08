@@ -11,7 +11,8 @@ export default class Frontpage extends React.Component{
     this.handleChange = this.handleChange.bind(this)
     this.state={ 
     searchInput:"",
-    locationInput:""
+    locationInput:"",
+    data:""
     }
   }
   /*Method to run animation and fetch required
@@ -29,9 +30,11 @@ export default class Frontpage extends React.Component{
       }
     })
     .then(
-      (res)=>console.log(res))
+      (res)=>{
+        this.props.callbackFromParent(res.data.jsonBody.businesses);
+      })
     .catch(
-      (e)=>console.log("error")
+      (e)=>console.log("Error fetching and compiling data")
     );
    }
   /*add animation when submit button is clicked  */
@@ -58,8 +61,18 @@ export default class Frontpage extends React.Component{
   that is being changed*/
   handleChange(e,stateName){
     this.setState({[stateName]:e.target.value})
-  }
-
+  }  
+/*Adding event listeners to input fields 
+to simulate form element 
+without to avoid default browser validation */
+  componentDidMount(){
+    var input = document.getElementsByClassName('search');
+    input[0].addEventListener('keydown',(e)=>{
+      if(e.keyCode== 13){this.submitform()}});
+    input[1].addEventListener('keydown',(e)=>{
+      if(e.keyCode== 13){this.submitform()}});
+    }
+  
   render(){return(
   <div className="frontpage-container">
     <div className="mainsearch-container">
@@ -70,6 +83,7 @@ export default class Frontpage extends React.Component{
             required 
             name="search" 
             class="search form-control" 
+            id="search-input"
             onChange={(e)=>this.handleChange(e,"searchInput")} 
             value={this.state.name}>
           </input>
@@ -79,6 +93,7 @@ export default class Frontpage extends React.Component{
           <input 
             required 
             name="location" 
+            id="location-input"
             class="search form-control" 
             onChange={(e)=>this.handleChange(e,"locationInput")}>
           </input>

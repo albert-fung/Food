@@ -3,7 +3,12 @@
 }
 
 .frontpage-container {
-  margin: auto;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .mainsearch-container {
@@ -12,7 +17,7 @@
   position: relative;
   width: 70vw;
   min-width: 200px;
-  min-height: 100px;
+  min-height: 125px;
   border-radius: 50px;
   justify-content: center;
   align-items: center;
@@ -30,6 +35,10 @@
 
 .search-container {
   display: flex;
+  align-items: center;
+}
+.search-container form {
+  display: inherit;
 }
 .search-container input {
   z-index: 200;
@@ -56,7 +65,8 @@
   color: rgba(3, 150, 248, 0.144);
   pointer-events: none;
 }
-.search-container .search:focus ~ .form-placeholder, .search-container .search:valid ~ .form-placeholder {
+.search-container .search:focus ~ .form-placeholder,
+.search-container .search:valid ~ .form-placeholder {
   color: #0396f8;
   font-size: 0.75em;
   top: 0;
@@ -71,7 +81,7 @@
 }
 @keyframes translateX {
   10%, 80% {
-    transform: translateX(200px);
+    transform: translateX(50vw);
   }
 }
 .search-container #btn-submit {
@@ -110,8 +120,9 @@
 
 .roundbtn-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   text-align: center;
+  width: 60%;
 }
 
 .round-btn {
@@ -119,8 +130,10 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 7vw;
+  min-width: 70px;
+  height: 7vw;
+  min-height: 70px;
   background-color: #3498db;
   margin-top: 18px;
 }

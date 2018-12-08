@@ -1,6 +1,24 @@
-body , html,#root
-{ height:100%;
-  width:100%;
+body ,
+html,
+#root { 
   margin:0;
-  display:flex;
+  overflow-x: hidden;
+}
+
+/*Scrollbar*/
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background:white; 
+  
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(192, 191, 191); 
+  border-radius: 10px;
+  transition: 5s all;
 }

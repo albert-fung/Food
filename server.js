@@ -11,7 +11,7 @@ app.get('/api/restaurants', (req, res) => {
   client.search({
     term,
     location,
-    "limit":10
+    "limit":5
   })
   .then(response=>{
     res.json(response);

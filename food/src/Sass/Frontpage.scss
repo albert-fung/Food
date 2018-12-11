@@ -16,6 +16,7 @@ $input-width:20vw;
   flex-direction:column;
   align-items: center;
   justify-content: center;
+  overflow:hidden;
 }
 .mainsearch-container{
   font-family:$regular-font;
@@ -47,7 +48,7 @@ $input-width:20vw;
   input{
     z-index: 200;
     font-family:$regular-font;
-    padding: 8px 5px 7px 10px;
+    padding: 10px 5px 10px 20px;
     margin-right:20px;
     font-size:3vh;
     height:$input-height;
@@ -62,7 +63,7 @@ $input-width:20vw;
   .form-placeholder{
     position: absolute;
     transition:all 200ms;
-    font-size:1.2em;
+    font-size:2vw;
     top:$input-height/4;
     left:15px;
     color:rgba(3, 150, 248, 0.144);
@@ -72,8 +73,8 @@ $input-width:20vw;
   .search:valid ~ .form-placeholder{
       color:rgb(3, 150, 248);
       font-size: 0.75em;
-      top:0;
-      left:15px;
+      top:5px;
+      left:1.5vw;
     }
   i{
     color:white;
@@ -136,9 +137,6 @@ $input-width:20vw;
   height:7vw;min-height:70px;
   background-color:#3498db;
   margin-top:18px;
-}
-.round-btn i{
-  color:#e17055;
 }
 
 @media only screen and (max-width: 640px) {

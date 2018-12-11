@@ -16,7 +16,7 @@ export default class Frontpage extends React.Component{
     }
   }
   /*Method to run animation and fetch required
-  data depending on input */
+  data*/
   submitform(){
     this.addanimation();
     this.fetchdata();
@@ -33,9 +33,9 @@ export default class Frontpage extends React.Component{
       (res)=>{
         this.props.callbackFromParent(res.data.jsonBody.businesses);
       })
-    .catch(
-      (e)=>console.log("Error fetching and compiling data")
-    );
+      .catch(
+        (e)=>console.log("Error fetching and compiling data")
+      );
    }
   /*add animation when submit button is clicked  */
   addanimation(){
@@ -81,6 +81,8 @@ without to avoid default browser validation */
         <div className="input-container">
           <input
             required 
+            spellcheck="false"
+            autoComplete="off"
             name="search" 
             class="search form-control" 
             id="search-input"
@@ -92,6 +94,8 @@ without to avoid default browser validation */
         <div className="input-container">
           <input 
             required 
+            spellcheck="false"
+            autoComplete="off"
             name="location" 
             id="location-input"
             class="search form-control" 

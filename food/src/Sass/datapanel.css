@@ -1,3 +1,62 @@
-
+.businesspanel {
+  display: grid;
+  grid-template-columns: 200px auto auto;
+  grid-template-rows: 75px auto;
+  grid-template-areas: "photo ratings info" "photo other other";
+  width: 70%;
+  margin: 0 auto 0 auto;
+  padding: 20px 0 20px 0;
+  height: 10%;
+  min-height: 200px;
+  font-family: "Montserrat", sans-serif;
+  border-top: 1px #f0f0f0 solid;
+}
+.businesspanel__image {
+  grid-area: photo;
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+}
+.businesspanel__image img {
+  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center center;
+  transition: all 0.2s;
+}
+.businesspanel__image img:hover {
+  opacity: 0.8;
+}
+.businesspanel__info {
+  margin-left: 50px;
+}
+.businesspanel__info h3 {
+  margin: 0 0 10px 0;
+}
+.businesspanel__info a:visited {
+  color: blue;
+}
+.businesspanel__info a:hover {
+  color: #6666ff;
+}
+.businesspanel__info .rating {
+  display: flex;
+  align-content: center;
+  margin-bottom: 5px;
+}
+.businesspanel__info .rating__reviewcount {
+  color: rgba(61, 61, 61, 0.76);
+}
+.businesspanel__info .rating img {
+  padding-right: 10px;
+}
+.businesspanel__communication {
+  text-align: right;
+}
+.businesspanel__other {
+  margin: 10px 0 0 50px;
+  grid-area: other;
+}
 
 /*# sourceMappingURL=datapanel.css.map */

@@ -3,6 +3,7 @@ html,
 #root { 
   margin:0;
   overflow-x: hidden;
+  overflow-y:scroll;
 }
 
 /*Scrollbar*/
@@ -10,7 +11,6 @@ html,
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
   background:white; 
@@ -20,5 +20,4 @@ html,
 ::-webkit-scrollbar-thumb {
   background: rgb(192, 191, 191); 
   border-radius: 10px;
-  transition: 5s all;
 }

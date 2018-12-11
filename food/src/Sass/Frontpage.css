@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .mainsearch-container {
@@ -43,7 +44,7 @@
 .search-container input {
   z-index: 200;
   font-family: "Open Sans", sans-serif;
-  padding: 8px 5px 7px 10px;
+  padding: 10px 5px 10px 20px;
   margin-right: 20px;
   font-size: 3vh;
   height: 6vh;
@@ -59,7 +60,7 @@
 .search-container .form-placeholder {
   position: absolute;
   transition: all 200ms;
-  font-size: 1.2em;
+  font-size: 2vw;
   top: 1.5vh;
   left: 15px;
   color: rgba(3, 150, 248, 0.144);
@@ -69,8 +70,8 @@
 .search-container .search:valid ~ .form-placeholder {
   color: #0396f8;
   font-size: 0.75em;
-  top: 0;
-  left: 15px;
+  top: 5px;
+  left: 1.5vw;
 }
 .search-container i {
   color: white;
@@ -136,10 +137,6 @@
   min-height: 70px;
   background-color: #3498db;
   margin-top: 18px;
-}
-
-.round-btn i {
-  color: #e17055;
 }
 
 @media only screen and (max-width: 640px) {

@@ -1,0 +1,65 @@
+.businesspanel {
+  display:grid;
+  grid-template-columns: 200px auto auto ;
+  grid-template-rows: 75px auto;
+  grid-template-areas:
+  'photo ratings info'
+  'photo other other';
+  width:70%;
+  margin:0 auto 0 auto;
+  padding:20px 0 20px 0;
+  height:10%;min-height:200px;
+  font-family: 'Montserrat', sans-serif;
+  border-top:1px rgba(240, 240, 240,1) solid ;
+  &__image {
+    grid-area: photo;
+    height:200px;
+    width:200px;
+    overflow:hidden;
+    img{
+      border-radius:10px;
+      width:200px;
+      height:200px;
+      object-fit:cover;
+      object-position: center center;
+      transition: all 0.2s ;
+    &:hover {
+      opacity: 0.8;
+    }
+    }
+  }
+
+  &__info {
+    margin-left:50px;
+    h3 {
+      margin:0 0 10px 0;
+    }
+    a {
+      &:visited{
+        color:blue;
+      }
+      &:hover{
+        color:lighten(blue, 20%);
+      }
+    }
+    .rating {
+      display:flex;
+      align-content: center;
+      margin-bottom: 5px;
+      
+      &__reviewcount {
+        color:rgba(61, 61, 61, 0.76);
+      }
+      img {
+        padding-right:10px;
+      }
+    }
+  }
+  &__communication{
+    text-align: right;
+  }
+  &__other{
+    margin:10px 0 0 50px;
+    grid-area: other;
+  }
+}

@@ -31,10 +31,10 @@ export default class Frontpage extends React.Component{
     })
     .then(
       (res)=>{
-        this.props.callbackFromParent(res.data.jsonBody.businesses);
+        this.props.callbackBusiness(res.data.jsonBody.businesses)  
       })
       .catch(
-        (e)=>console.log("Error fetching and compiling data")
+        (e)=>console.log(e)
       );
    }
   /*add animation when submit button is clicked  */
@@ -63,8 +63,7 @@ export default class Frontpage extends React.Component{
     this.setState({[stateName]:e.target.value})
   }  
 /*Adding event listeners to input fields 
-to simulate form element 
-without to avoid default browser validation */
+to simulate form element to avoid default browser validation */
   componentDidMount(){
     var input = document.getElementsByClassName('search');
     input[0].addEventListener('keydown',(e)=>{

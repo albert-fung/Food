@@ -1,5 +1,6 @@
 import React from 'react';
 import Frontpage from "./Frontpage/Frontpage.js";
+import axios from 'axios';
 import "./Sass/datapanel.css"
 
 export default class Webpage extends React.Component{
@@ -9,20 +10,20 @@ export default class Webpage extends React.Component{
       data:[]
     }
   }
-  myCallback = (dataFromChild) => {
-    console.log(dataFromChild)
-    this.setState({data:dataFromChild})
+  myCallback = (business) => {
+    this.setState({
+      data:business,
+    })
   }
-  
   render(){
     return(
     <div> 
       <Frontpage 
-        callbackFromParent={this.myCallback}>
-      </Frontpage>
+        callbackBusiness={this.myCallback}
+      />
       <DataList
-        data={this.state.data}>
-      </DataList> 
+        data={this.state.data}
+      /> 
     </div>
     )
   }
@@ -42,21 +43,29 @@ class DataList extends React.Component{
         return(
         <div className="businesspanel">
           <div className="businesspanel__image">
-            <a target="_blank" href={data.url}><img src={data.image_url}></img></a>
+            <a target="_blank" rel="noopener noreferrer" href={data.url}>
+              <img alt={data.name} src={data.image_url}></img>
+            </a>
           </div>
           <div className="businesspanel__info">
-            <h3><a href={data.url} target="_blank">{data.name}</a></h3>
+            <h3>
+              <a href={data.url} target="_blank" rel="noopener noreferrer">
+                {data.name}
+              </a>
+            </h3>
             <Rating data={data}/>
             {data.price} 	
             {" "}&#xb7;{" "} 
             {data.categories.map(category=>category.title).join(", ")}
           </div>
           <div className="businesspanel__communication">
-          {data.phone}<br/>
+          {/*Formating phone number  */}
+          {data.phone.slice(2,5)+" "+data.phone.slice(5,8)+" "+data.phone.slice(8,12)}<br/>
           {data.location.address1}<br/>
           {data.location.city}
           </div>
-          <BusinessHours data={data}/>
+          
+          <BusinessHours id={data.id}/>
           </div>
         )
       })}
@@ -96,13 +105,24 @@ class Rating extends React.Component{
 
 class BusinessHours extends React.Component{
   constructor() {
-   super()
+    super();
+    this.getHours=this.getHours.bind(this);
+    this.state={hours:"",isloading:true}
   }
-  
-
+  componentDidMount(){
+    this.getHours(this.props.id);
+  }
+  getHours(id){
+      axios.get('./api/restauranthours',{params:{id}})
+      .then((res)=>{
+          this.setState({
+          hours:res.data.jsonBody.hours,
+          isloading:false})
+        })
+  }
   render() {
     var weekdays={
-      0 : "Monday",
+      0 : "Monday", 
       1 : "Tuesday",
       2 : "Wednesday",
       3 : "Thursday",
@@ -110,10 +130,18 @@ class BusinessHours extends React.Component{
       5 : "Saturday",
       6 : "Sunday",
     }
+    if(this.state.isloading || typeof this.state.hours === "undefined"){
+      console.log("hello?")
+      return "N/A";   
+    }
     return(
-      <div className="businesspanel__other">
-      Hours
-      {console.log(this.props.data)}
+    <div>
+    {
+    this.state.hours[0].open.map(openhours=>{return(
+    <div>
+      {weekdays[openhours.day]+" : " + openhours.start+" - "+ openhours.end}
+    </div>
+    )})}
     </div>
     )
   }

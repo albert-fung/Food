@@ -54,7 +54,8 @@ class DataList extends React.Component{
               </a>
             </h3>
             <Rating data={data}/>
-            {data.price} 	
+            {data.price}
+            {/*#xb7 is just a text center dot */}
             {" "}&#xb7;{" "} 
             {data.categories.map(category=>category.title).join(", ")}
           </div>
@@ -64,7 +65,6 @@ class DataList extends React.Component{
           {data.location.address1}<br/>
           {data.location.city}
           </div>
-          
           <BusinessHours id={data.id}/>
           </div>
         )
@@ -76,7 +76,7 @@ class DataList extends React.Component{
 
 class Rating extends React.Component{
   render(){
-    /*Yelp Rating URL  */
+    /*Yelp Rating star pictures from 0-5  */
     var rating_url = {
     0:"./rating_img/regular_0.png",
     1:"./rating_img/regular_1.png",
@@ -109,9 +109,14 @@ class BusinessHours extends React.Component{
     this.getHours=this.getHours.bind(this);
     this.state={hours:"",isloading:true}
   }
+  /*Get hours when search first time or multiple times */
   componentDidMount(){
     this.getHours(this.props.id);
   }
+  componentDidUpdate(){
+    this.getHours(this.props.id);
+  }
+
   getHours(id){
       axios.get('./api/restauranthours',{params:{id}})
       .then((res)=>{
@@ -121,6 +126,7 @@ class BusinessHours extends React.Component{
         })
   }
   render() {
+  //*Referencing Yelps API day:0 = monday .. day:6 = sunday */
     var weekdays={
       0 : "Monday", 
       1 : "Tuesday",
@@ -131,18 +137,33 @@ class BusinessHours extends React.Component{
       6 : "Sunday",
     }
     if(this.state.isloading || typeof this.state.hours === "undefined"){
-      console.log("hello?")
-      return "N/A";   
+      return( 
+      <div className="businesspanel--error">
+        {"Sorry could not find these hours"}
+      </div>   
+      )  
     }
     return(
-    <div>
-    {
-    this.state.hours[0].open.map(openhours=>{return(
-    <div>
-      {weekdays[openhours.day]+" : " + openhours.start+" - "+ openhours.end}
-    </div>
-    )})}
+      /*Check if there are multiple hours opening hours per day
+      if so dont repeat the weekday */
+      <div className="businesspanel__hours">
+      {this.state.hours[0].open.map((openhours,index)=>{
+        //*if a store has more than one opening
+        //time per day put them on the same line else add a breakline*//
+        if (index == 0 || openhours.day != this.state.hours[0].open[index-1].day) {
+          return(
+          <span><br/>
+            {weekdays[openhours.day]+" : " + openhours.start+" - "+ openhours.end}
+          </span>
+          )
+        }
+        else {
+          return(
+            <span>{" & "+openhours.start+" - "+ openhours.end}</span>
+          )
+        }
+        })}
     </div>
     )
+    }
   }
-}

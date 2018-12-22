@@ -16,6 +16,7 @@
   height: 200px;
   width: 200px;
   overflow: hidden;
+  margin: auto 0 auto 0;
 }
 .businesspanel__image img {
   border-radius: 10px;
@@ -57,6 +58,12 @@
 .businesspanel__other {
   margin: 10px 0 0 50px;
   grid-area: other;
+}
+.businesspanel__hours {
+  padding: 0 0 0 50px;
+}
+.businesspanel--error {
+  padding: 10px 0 0 50px;
 }
 
 /*# sourceMappingURL=datapanel.css.map */

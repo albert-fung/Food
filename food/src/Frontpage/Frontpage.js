@@ -107,25 +107,6 @@ to simulate form element to avoid default browser validation */
         </div>
       </div>
     </div>
-    <div className="roundbtn-container">
-      <Roundbtn></Roundbtn>
-      <Roundbtn></Roundbtn>
-      <Roundbtn></Roundbtn>
-      <Roundbtn></Roundbtn>
-    </div>
   </div>
     )}
-}
-
-class Roundbtn extends React.Component {
-  render(){
-    return(
-    <div>
-      <div className="round-btn">
-      <i className={"fas fa-2x "+this.props.symbol}></i>
-      </div>
-      text
-    </div>
-    )
-  }
 }

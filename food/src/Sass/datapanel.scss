@@ -16,6 +16,7 @@
     height:200px;
     width:200px;
     overflow:hidden;
+    margin: auto 0 auto 0;
     img{
       border-radius:10px;
       width:200px;
@@ -55,11 +56,17 @@
       }
     }
   }
-  &__communication{
+  &__communication {
     text-align: right;
   }
-  &__other{
+  &__other {
     margin:10px 0 0 50px;
     grid-area: other;
+  }
+  &__hours {
+    padding:0 0 0 50px;
+  }
+  &--error{
+    padding:10px 0 0 50px;
   }
 }

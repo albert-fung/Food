@@ -9,4 +9,5 @@ This program utilises both Yelp fusion and google places API to help the user se
 - Google places API 
 - Yelp Fusion API 
 
-##
+## TODO 
+Mobile compatibility needs to be incorporated.

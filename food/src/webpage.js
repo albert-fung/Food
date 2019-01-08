@@ -3,6 +3,7 @@ import Frontpage from "./Frontpage/Frontpage.js";
 import axios from 'axios';
 import "./Sass/datapanel.css"
 
+/*Container for whole website */
 export default class Webpage extends React.Component{
   constructor(){
     super();
@@ -18,17 +19,13 @@ export default class Webpage extends React.Component{
   render(){
     return(
     <div> 
-      <Frontpage 
-        callbackBusiness={this.myCallback}
-      />
-      <DataList
-        data={this.state.data}
-      /> 
+      <Frontpage callbackBusiness={this.myCallback}/>
+      <DataList data={this.state.data}/> 
     </div>
     )
   }
 }
-
+/*List of places Yelp returns  */
 class DataList extends React.Component{
   render()
   {return(
@@ -65,10 +62,11 @@ class DataList extends React.Component{
           {data.location.address1}<br/>
           {data.location.city}
           </div>
-          <BusinessHours id={data.id}/>
+          <BusinessHours name={data.name} id={data.id}/>
           </div>
-        )
-      })}
+        )})
+      }
+
     </div>
   )
   }
@@ -107,23 +105,31 @@ class BusinessHours extends React.Component{
   constructor() {
     super();
     this.getHours=this.getHours.bind(this);
-    this.state={hours:"",isloading:true}
+    this.state={
+      hours:"",
+      isloading:true
+    }
   }
   /*Get hours when search first time or multiple times */
   componentDidMount(){
-    this.getHours(this.props.id);
+    this.getHours(this.props.id,this.props.name);
   }
-  componentDidUpdate(){
-    this.getHours(this.props.id);
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id) {
+      this.getHours(this.props.id,this.props.name);
+    }
   }
 
-  getHours(id){
+  getHours(id,name){
       axios.get('./api/restauranthours',{params:{id}})
       .then((res)=>{
           this.setState({
           hours:res.data.jsonBody.hours,
-          isloading:false})
+          isloading:false},
+          )
         })
+      .catch(
+      )
   }
   render() {
   //*Referencing Yelps API day:0 = monday .. day:6 = sunday */

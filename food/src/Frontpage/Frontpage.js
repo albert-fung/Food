@@ -2,24 +2,49 @@ import React from 'react';
 import axios from 'axios';
 import "../Sass/Frontpage.css";
 
+
 export default class Frontpage extends React.Component{
-  constructor()
-  {
+  constructor() {
     super()
-    this.submitform = this.submitform.bind(this);
+    this.submitform = this.submitform.bind(this)
     this.addanimation = this.addanimation.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.findlocation = this.findlocation.bind(this)
     this.state={ 
-    searchInput:"",
-    locationInput:"",
-    data:""
+      searchInput:"",
+      locationInput:"Toronto,ON",
+      data:""
     }
   }
+
   /*Method to run animation and fetch required
   data*/
   submitform(){
     this.addanimation();
     this.fetchdata();
+  }
+  /*Located current location and fill location field*/
+  findlocation(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+       (position)=>{
+          var key = require('../Google_apiKey.js');
+          fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + position.coords.latitude + ',' + position.coords.longitude + '&key=' + key.Google_apiKey)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            //Setting location as current location retrieved by reverse geocoding
+            this.setState({locationInput:responseJson.results[0].formatted_address});
+            })  
+          },
+      //Function if user does not allow for location to be used.
+      ()=>{
+        alert("Location disabled , please enable this function in order to use 'current location'. ")
+      })
+    } 
+    //Error message if browser does not support location 
+    else {
+      alert('Your browser does not support current location')
+    }
   }
 /*Get request using axios library */
   fetchdata(){
@@ -80,6 +105,7 @@ to simulate form element to avoid default browser validation */
         <div className="input-container">
           <input
             required 
+            value={this.state.searchInput} 
             spellcheck="false"
             autoComplete="off"
             name="search" 
@@ -92,7 +118,8 @@ to simulate form element to avoid default browser validation */
         </div>
         <div className="input-container">
           <input 
-            required 
+            required
+            value={this.state.locationInput} 
             spellcheck="false"
             autoComplete="off"
             name="location" 
@@ -102,9 +129,15 @@ to simulate form element to avoid default browser validation */
           </input>
           <label for="search" class="form-placeholder">Location</label>
         </div>
-        <div id="btn-submit" onClick={(e)=>this.submitform(e)}>
+        {/*Submit and location buttons */}
+
+        <button id="btn-location" onClick={()=>this.findlocation()}>
+          <i class="fas fa-map-marker-alt fa-2x"></i>
+        </button>
+        <button id="btn-submit" onClick={(e)=>this.submitform(e)}>
           <i class="fas fa-arrow-right fa-2x"></i>
-        </div>
+        </button>
+       
       </div>
     </div>
   </div>

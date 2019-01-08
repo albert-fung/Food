@@ -18,5 +18,3 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-#Api key for Yelp-fusion
-api-key.js
